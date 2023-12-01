@@ -2,7 +2,13 @@ const servicesContainer = document.getElementById("services");
 
 const getServiceDetails = async (serviceId) => {
     try {
-        const response = await fetch(`https://pofuki.wordifysites.com/wp-json/wp/v2/services/${serviceId}`);
+        const response = await fetch(`https://pofuki.wordifysites.com/wp-json/wp/v2/services/${serviceId}`, {
+            credentials: 'include', // Include credentials in the request
+            headers: {
+                'Authorization': 'Basic ' + btoa('wordify:osnimftt') // Encode username:password for HTTP basic authentication
+            }
+        });
+
         const serviceData = await response.json();
         return serviceData.title.rendered;
     } catch (error) {
@@ -13,7 +19,13 @@ const getServiceDetails = async (serviceId) => {
 
 const getServicesByServiceType = async () => {
     try {
-        const response = await fetch("https://pofuki.wordifysites.com/wp-json/wp/v2/services");
+        const response = await fetch("https://pofuki.wordifysites.com/wp-json/wp/v2/services", {
+            credentials: 'include', // Include credentials in the request
+            headers: {
+                'Authorization': 'Basic ' + btoa('wordify:osnimftt') // Encode username:password for HTTP basic authentication
+            }
+        });
+
         const servicesData = await response.json();
 
         const servicesByType = {};
@@ -38,37 +50,37 @@ const getServicesByServiceType = async () => {
             serviceTypeElement.classList.add('specialisms-list')
             serviceTypeElement.innerHTML = `
                 <div class="title">
-                           <h3>${serviceType}</h3>
-                        </div>
-                        <ul>
-                        ${serviceTitles.map(title => `
-                           <li>
-                              <a href="service-detail.html" class="single-specialism">
-                                 <span>${title}</span>
-                                 <div class="btn btn-arrow">
+                    <h3>${serviceType}</h3>
+                </div>
+                <ul>
+                    ${serviceTitles.map(title => `
+                        <li>
+                            <a href="service-detail.html" class="single-specialism">
+                                <span>${title}</span>
+                                <div class="btn btn-arrow">
                                     <div class="arrow small border first">
-                                       <div class="arrow-fill"></div>
-                                       <div class="arrow-content">
-                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                             <polyline points="18 8 18 18 8 18" fill="none" stroke="#000" stroke-miterlimit="10"/>
-                                             <line x1="18" y1="18" x2="5" y2="5" fill="none" stroke="#000" stroke-miterlimit="10"/>
-                                          </svg>
-                                       </div>
+                                        <div class="arrow-fill"></div>
+                                        <div class="arrow-content">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <polyline points="18 8 18 18 8 18" fill="none" stroke="#000" stroke-miterlimit="10"/>
+                                                <line x1="18" y1="18" x2="5" y2="5" fill="none" stroke="#000" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
                                     </div>
                                     <div class="arrow small border second">
-                                       <div class="arrow-fill"></div>
-                                       <div class="arrow-content">
-                                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                             <polyline points="18 8 18 18 8 18" fill="none" stroke="#000" stroke-miterlimit="10"/>
-                                             <line x1="18" y1="18" x2="5" y2="5" fill="none" stroke="#000" stroke-miterlimit="10"/>
-                                          </svg>
-                                       </div>
+                                        <div class="arrow-fill"></div>
+                                        <div class="arrow-content">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <polyline points="18 8 18 18 8 18" fill="none" stroke="#000" stroke-miterlimit="10"/>
+                                                <line x1="18" y1="18" x2="5" y2="5" fill="none" stroke="#000" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
                                     </div>
-                                 </div>
-                              </a>
-                           </li>
-                           `).join('')}
-                        </ul>
+                                </div>
+                            </a>
+                        </li>
+                    `).join('')}
+                </ul>
             `;
 
             servicesContainer.appendChild(serviceTypeElement);
@@ -80,7 +92,13 @@ const getServicesByServiceType = async () => {
 
 const getServiceTypeDetails = async (termId) => {
     try {
-        const response = await fetch(`https://pofuki.wordifysites.com/wp-json/wp/v2/service-type/${termId}`);
+        const response = await fetch(`https://pofuki.wordifysites.com/wp-json/wp/v2/service-type/${termId}`, {
+            credentials: 'include', // Include credentials in the request
+            headers: {
+                'Authorization': 'Basic ' + btoa('wordify:osnimftt') // Encode username:password for HTTP basic authentication
+            }
+        });
+
         const serviceTypeData = await response.json();
         return serviceTypeData.name;
     } catch (error) {
